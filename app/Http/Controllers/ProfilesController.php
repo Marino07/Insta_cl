@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ProfilesController extends Controller
 {
@@ -20,4 +21,16 @@ class ProfilesController extends Controller
         ]);
 
     }
+
+    public function dashboard()
+    {
+        // Preuzmi trenutno prijavljenog korisnika
+        $user = Auth::user();
+
+        return view('dashboard', [
+            'user' => $user
+        ]);
+    }
+
 }
+

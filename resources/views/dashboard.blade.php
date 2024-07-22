@@ -13,9 +13,9 @@
                     <div><strong>23k</strong> followers</div>
                     <div><strong>212</strong> following</div>
                 </div>
-                <div class="pt-4 font-bold">InstaClone.org</div>
-                <div>My text usage is dialog in my futere ksasim not very resusable yesterday</div>
-                <div><a href="#">www.freeme.com</a></div>
+                <div class="pt-4 font-bold">{{ $user->profile->title }}</div>
+                <div>{{ $user->profile->description }}</div>
+                <div><a href="#">{{ $user->profile->url ?? 'N/A' }}</a></div>
             </div>
         </div>
         <div class="container mx-auto px-4 pt-5">
