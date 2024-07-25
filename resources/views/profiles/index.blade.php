@@ -7,7 +7,10 @@
                 </div>
             </div>
             <div class="w-3/4 pt-5">
-                <div><h1>{{ $user->username }}</h1></div>
+                <div class="flex justify-between">
+                    <h1>{{ $user->username }}</h1>
+                    <a href="#">Add new post</a>
+                </div>
                 <div class="flex space-x-4 items-center"> <!-- Dodano items-center za vertikalno poravnanje u ovom div-u -->
                     <div><strong>153</strong> posts</div>
                     <div><strong>23k</strong> followers</div>

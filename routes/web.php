@@ -10,6 +10,10 @@ Route::get('/', function () {
 
 Route::get('/dashboard', [ProfilesController::class, 'dashboard'])->name('dashboard');
 
+Route::get('/p/create',[\App\Http\Controllers\PostsController::class,'create']);
+Route::post('/p',[\App\Http\Controllers\PostsController::class,'store']);
+
+
 
 Route::get('/profile/{user}', [ProfilesController::class, 'index'])->name('profile.show');
 

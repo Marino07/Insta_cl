@@ -10,13 +10,10 @@ class ProfilesController extends Controller
 {
     public function index($user)
     {
-        $user = User::find($user);
+        $user = User::findOrFail($user);
 
-        if (!$user) {
-            abort(404, 'User not found');
-        }
 
-        return view('dashboard', [
+        return view('profiles.index', [
             'user' => $user
         ]);
 
@@ -27,7 +24,7 @@ class ProfilesController extends Controller
         // Preuzmi trenutno prijavljenog korisnika
         $user = Auth::user();
 
-        return view('dashboard', [
+        return view('profiles.index', [
             'user' => $user
         ]);
     }

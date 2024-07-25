@@ -2,7 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Dodatne prilagodbe */
+/* Dodatne prilagodbe
 body {
     @apply bg-white;
 }
+
+ */
