@@ -11,7 +11,11 @@ Route::get('/', function () {
 Route::get('/dashboard', [ProfilesController::class, 'dashboard'])->name('dashboard');
 
 Route::get('/p/create',[\App\Http\Controllers\PostsController::class,'create']);
+
+Route::middleware('auth')->group(function () {
+
 Route::post('/p',[\App\Http\Controllers\PostsController::class,'store']);
+});
 
 
 
