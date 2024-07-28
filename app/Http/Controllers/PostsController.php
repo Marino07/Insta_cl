@@ -25,9 +25,9 @@ class PostsController extends Controller
 
         $imagePath = $request->file('image')->store('uploads', 'public');
 
-        $image = ImageManager::imagick()->read("storage/{$imagePath}");
-        $image->resize(1200, 1200);
-        $image->save();
+        //$image = ImageManager::imagick()->read("storage/{$imagePath}");
+        //$image->resize(1200, 1200);
+        //$image->save();
 
         auth()->user()->posts()->create([
             'caption' => $data['caption'],
@@ -35,5 +35,12 @@ class PostsController extends Controller
         ]);
 
         return redirect('/profile/' . auth()->user()->id);
+    }
+
+    public function show(\App\Models\Post $post){
+
+        return view('posts.show',[
+            'post' => $post // or instead ['post0 => $post ] use compact($post)
+        ]);
     }
 }
