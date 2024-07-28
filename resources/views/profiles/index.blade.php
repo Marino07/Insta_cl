@@ -25,7 +25,7 @@
             <div class="grid grid-cols-3 gap-4">
 
                 @foreach($user->posts as $post)
-                    <div class="col-span-1">
+                    <div class="col-span-1 pb-3">
                         <img src="/storage/{{ $post->image }}" class="w-full">
 
                     </div>
