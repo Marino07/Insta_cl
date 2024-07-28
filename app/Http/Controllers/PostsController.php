@@ -25,9 +25,9 @@ class PostsController extends Controller
 
         $imagePath = $request->file('image')->store('uploads', 'public');
 
-        //$image = ImageManager::imagick()->read("storage/{$imagePath}");
-        //$image->resize(1200, 1200);
-        //$image->save();
+        $image = ImageManager::imagick()->read("storage/{$imagePath}");
+        $image->resize(1200, 800);
+        $image->save();
 
         auth()->user()->posts()->create([
             'caption' => $data['caption'],
