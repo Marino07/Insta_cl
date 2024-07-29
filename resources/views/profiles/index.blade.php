@@ -11,7 +11,10 @@
                     <h1>{{ $user->username }}</h1>
                     <a href="/p/create">Add new post</a>
                 </div>
-                <div class="flex space-x-4 items-center"> <!-- Dodano items-center za vertikalno poravnanje u ovom div-u -->
+                <a href="/profile/{{ $user->id }}/edit">Edit profile</a>
+
+                <div class="flex space-x-4 items-center">
+                    <!-- Dodano items-center za vertikalno poravnanje u ovom div-u -->
                     <div><strong>{{$user->posts->count()}}</strong> posts</div>
                     <div><strong>23k</strong> followers</div>
                     <div><strong>212</strong> following</div>
