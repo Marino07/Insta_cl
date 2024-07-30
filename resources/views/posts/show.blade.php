@@ -1,17 +1,20 @@
 <x-app-layout>
     <div class="container mx-auto px-4">
-        <div class="flex justify-center items-center min-h-screen"> <!-- Koristi min-h-screen za vertikalno centriranje -->
-            <div class="w-full p-5 max-w-3xl"> <!-- Dodaj max-w-3xl za ograničenje širine -->
-                <div class="flex justify-center mb-6">
-                    <img src="/storage/{{ $post->image }}" class="w-1/2 max-w-[50vw] h-auto rounded-lg shadow-lg"> <!-- Postavi širinu na 50% ekrana -->
-                </div>
-                <div class="flex flex-col items-center"> <!-- Koristi flex-col za vertikalno poravnanje -->
-                    <h3 class="text-xl font-semibold mb-2">{{ $post->user->username }}</h3> <!-- Dodaj marginu s donje strane -->
-                    <p class="text-lg text-center">{{ $post->caption }}</p> <!-- Dodaj marginu s donje strane i centriraj tekst -->
+        <div class="flex justify-center items-center min-h-screen">
+            <div class="w-full p-5 max-w-3xl">
+                <div class="flex items-start gap-6 mb-6">
+                    <!-- Profilna slika pomaknuta lijevo za 100px -->
+                    <div class="flex-shrink-0" style="margin-left: -100px;">
+                        <img src="/storage/{{ $post->user->profile->image }}" class="w-24 h-24 rounded-full object-cover shadow-lg" alt="Profile Picture">
+                    </div>
+
+                    <!-- Slika posta s opisom -->
+                    <div class="flex flex-col flex-grow">
+                        <img src="/storage/{{ $post->image }}" class="w-full max-w-[50vw] h-auto rounded-lg shadow-lg mb-4" alt="Post Image">
+                        <p class="text-lg text-center">{{ $post->caption }}</p>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </x-app-layout>
-
-

@@ -45,6 +45,25 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public static function boot()
+    {
+        parent::boot();
+
+        static::created(function($user) {
+            // Provjerite ako profil već postoji
+            if (!$user->profile) {
+                // Kreirajte profil ako ne postoji
+                Profile::create([
+                    'user_id' => $user->id,
+                    'title' => $user->username
+                ]);
+            }
+        });
+    }
+
+
+
     public function posts(){
         return $this->hasMany(Post::class)->orderBy('created_at','DESC');
     }

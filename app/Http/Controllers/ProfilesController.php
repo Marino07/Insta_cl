@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Intervention\Image\ImageManager;
 
 class ProfilesController extends Controller
 {
@@ -38,14 +39,30 @@ class ProfilesController extends Controller
 
     }
     public function update(\App\Models\User $user){
+        $imagePath = null;
         $data = request()->validate([
             'title' => 'required',
             'description' => 'required',
-            'url' => 'url',
+            'url' => '',
             'image' => ''
         ]);
 
-        auth()->$user->profile()->update($data);
+        //auth()->
+
+        if(request('image')){
+            $imagePath = request()->file('image')->store('profile', 'public');
+
+            $image = ImageManager::imagick()->read("storage/{$imagePath}");
+            $image->resize(1000, 1000);
+            $image->save();
+
+
+        }
+        $user->profile()->update(array_merge(
+            $data,
+            ['image' => $imagePath],
+        ));
+
 
         return redirect("/profile/{$user->id}"); // php {} blade {{}}
 
