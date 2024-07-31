@@ -39,7 +39,6 @@ class ProfilesController extends Controller
 
     }
     public function update(\App\Models\User $user){
-        $imagePath = null;
         $data = request()->validate([
             'title' => 'required',
             'description' => 'required',
@@ -56,11 +55,12 @@ class ProfilesController extends Controller
             $image->resize(1000, 1000);
             $image->save();
 
+            $imageArray = ['image' => $imagePath];
 
         }
         $user->profile()->update(array_merge(
             $data,
-            ['image' => $imagePath],
+            $imageArray ?? [],
         ));
 
 
