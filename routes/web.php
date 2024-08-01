@@ -8,6 +8,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::post('/follow/{user}',[\App\Http\Controllers\FollowsController::class,'store']);
+
+
 Route::get('/dashboard', [ProfilesController::class, 'dashboard'])->name('dashboard');
 
 Route::get('/p/create',[\App\Http\Controllers\PostsController::class,'create']);
@@ -19,9 +22,6 @@ Route::middleware('auth')->group(function () {
 
 Route::post('/p',[\App\Http\Controllers\PostsController::class,'store']);
 });
-
-
-
 Route::get('/profile/{user}', [ProfilesController::class, 'index'])->name('profile.show');
 Route::get('/profile/{user}/edit', [ProfilesController::class, 'edit'])->name('profile.edit');
 Route::patch('/profile/{user}', [ProfilesController::class, 'update'])->name('profile.update');

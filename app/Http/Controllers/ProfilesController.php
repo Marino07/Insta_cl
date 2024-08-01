@@ -25,7 +25,7 @@ class ProfilesController extends Controller
         // Preuzmi trenutno prijavljenog korisnika
         $user = Auth::user();
 
-        return view('profiles.index', [
+        return view('profiles.dashboard', [
             'user' => $user
         ]);
     }

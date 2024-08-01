@@ -36,7 +36,6 @@
                         {{ __('Save Profile') }}
                     </button>
                 </div>
-
             </div>
         </form>
 
