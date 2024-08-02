@@ -10,7 +10,6 @@ Route::get('/', function () {
 
 Route::post('/follow/{user}',[\App\Http\Controllers\FollowsController::class,'store']);
 
-
 Route::get('/dashboard', [ProfilesController::class, 'dashboard'])->name('dashboard');
 
 Route::get('/p/create',[\App\Http\Controllers\PostsController::class,'create']);

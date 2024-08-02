@@ -11,7 +11,7 @@
                     <div class="flex items-center space-x-4"> <!-- Grupe koje drže korisničko ime i Follow dugme -->
                         <h1 class="text-xl font-bold">{{ $user->username }}</h1>
                         <div id="app">
-                            <follow-button user-id="{{ $user->id }}"></follow-button>
+                            <follow-button user-id="{{ $user->id }}" follows="{{ $follows }}"></follow-button>
                         </div>
                     </div>
                     <a href="/p/create" class="text-blue-500 hover:underline">Add new post</a>
@@ -20,8 +20,8 @@
 
                 <div class="flex space-x-4 items-center mt-4">
                     <div><strong>{{$user->posts->count()}}</strong> posts</div>
-                    <div><strong>23k</strong> followers</div>
-                    <div><strong>212</strong> following</div>
+                    <div><strong>{{ $user->profile->followers->count() }}</strong> followers</div>
+                    <div><strong>{{ $user->following->count() }}</strong> following</div>
                 </div>
                 <div class="pt-4 font-bold">{{ $user->profile->title }}</div>
                 <div>{{ $user->profile->description }}</div>

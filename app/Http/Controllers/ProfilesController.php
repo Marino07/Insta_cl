@@ -11,12 +11,11 @@ class ProfilesController extends Controller
 {
     public function index( \App\Models\User $user)
     {
-        // \App\Models\User ili $user = User::findOrFail($user);
+        $follows = (auth()->user()) ? auth()->user()->following->contains($user->id) : false;
 
-
-        return view('profiles.index', [
-            'user' => $user
-        ]);
+        //dd($follows);
+       // \App\Models\User ili $user = User::findOrFail($user);
+        return view('profiles.index', compact('user','follows'));
 
     }
 
@@ -25,7 +24,7 @@ class ProfilesController extends Controller
         // Preuzmi trenutno prijavljenog korisnika
         $user = Auth::user();
 
-        return view('profiles.dashboard', [
+        return view('profiles.index', [
             'user' => $user
         ]);
     }
