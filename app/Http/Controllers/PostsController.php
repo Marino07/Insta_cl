@@ -11,6 +11,11 @@ use Intervention\Image\Laravel\Facades\Image;
 
 class PostsController extends Controller
 {
+    public function index(){
+        $users = auth()->user()->following()->pluck('profiles.user_id');
+        $posts = Post::whereIn('user_id',$users)->orderBy('created_at','DESC')->get();
+        return view('posts.index',compact('posts'));
+    }
     public function create()
     {
         return view('posts.create');
@@ -43,4 +48,5 @@ class PostsController extends Controller
             'post' => $post // or instead ['post0 => $post ] use compact($post)
         ]);
     }
+
 }

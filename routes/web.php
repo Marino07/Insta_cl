@@ -4,13 +4,14 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProfilesController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
 
 Route::post('/follow/{user}',[\App\Http\Controllers\FollowsController::class,'store']);
 
 Route::get('/dashboard', [ProfilesController::class, 'dashboard'])->name('dashboard');
+
+Route::get('/', [\App\Http\Controllers\PostsController::class,'index'])->name('main');
+
 
 Route::get('/p/create',[\App\Http\Controllers\PostsController::class,'create']);
 
