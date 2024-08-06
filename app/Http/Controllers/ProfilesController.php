@@ -5,17 +5,38 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 use Intervention\Image\ImageManager;
 
 class ProfilesController extends Controller
 {
     public function index( \App\Models\User $user)
     {
+        $postCount =  Cache::remember(
+            'count.posts' . $user->id, // checking is there key if it is no need to call database
+            now()->addSeconds(30),
+            function () use($user){ // if it not call this function and store in cache in 30 sec
+                return $user->posts->count();
+            });
+
+        $followingCount = Cache::remember(
+            'count.posts' . $user->id,
+            now()->addSeconds(30),
+            function () use($user){
+            return $user->following()->count();
+        });
+        $followerCount = Cache::remember(
+            'count.posts' . $user->id,
+            now()->addSeconds(30),
+            function () use($user){
+                return $user->profile->followers->count();
+            });
+
         $follows = (auth()->user()) ? auth()->user()->following->contains($user->id) : false;
 
         //dd($follows);
        // \App\Models\User ili $user = User::findOrFail($user);
-        return view('profiles.index', compact('user','follows'));
+        return view('profiles.index', compact('user','follows','postCount','followingCount','followerCount'));
 
     }
 

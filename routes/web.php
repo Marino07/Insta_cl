@@ -4,7 +4,9 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProfilesController;
 use Illuminate\Support\Facades\Route;
 
-
+Route::get('/email',function (){
+    return new \App\Mail\NewUserWelcomeMail();
+});
 
 Route::post('/follow/{user}',[\App\Http\Controllers\FollowsController::class,'store']);
 

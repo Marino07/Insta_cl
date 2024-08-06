@@ -28,5 +28,11 @@
                 </div>
             </div>
         @endforeach
+            <div class="container">
+                <div class="flex flex-col"> <!-- Dodane klase flex i items-center -->
+                    {{ $posts->links() }}
+                </div>
+            </div>
+
     </div>
 </x-app-layout>
