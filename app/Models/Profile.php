@@ -7,7 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Profile extends Model
 {
-    protected $guarded = [];
+    protected $fillable = [
+        'user_id',
+    ];
 
     public function ProfileImage(){
         return $this->image ? '/storage/'.$this->image : 'storage/profile/0zsmdOjLcILukVvzGqrbybkADz9yY2tbwl3Eta77.jpg';

@@ -51,6 +51,9 @@ class ProfilesController extends Controller
     public function edit(\App\Models\User $user){
         //$user = User::findOrFail($user); OR IN PARAM NAMESPACE
 
+        // bug $this->authorize('update', $user->profile);
+
+
 
         return view('profiles.edit', [
             'user' => $user // OR USE compact($user)

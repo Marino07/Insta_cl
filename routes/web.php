@@ -2,7 +2,14 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProfilesController;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Route;
+
+Route::get('/test-authorization', function () {
+    $user = auth()->user();
+    $profile = $user->profile;
+    return Gate::allows('view', $profile) ? 'Authorized' : 'Not Authorized';
+});
 
 Route::get('/email',function (){
     return new \App\Mail\NewUserWelcomeMail();
