@@ -14,14 +14,18 @@
                             <follow-button user-id="{{ $user->id }}" follows="{{ $follows }}"></follow-button>
                         </div>
                     </div>
-                    <a href="/p/create" class="text-blue-500 hover:underline">Add new post</a>
+                    @if(Auth::id() === $user->id)
+                        <a href="/p/create/{{ $user->profile->id }}" class="text-blue-500 hover:underline">Add new post</a>
+                    @endif
                 </div>
-                <a href="/profile/{{ $user->id }}/edit" class="text-blue-500 hover:underline">Edit profile</a>
+                @can('update',$user->profile)
+                    <a href="/profile/{{ $user->id }}/edit" class="text-blue-500 hover:underline">Edit profile</a>
+                @endcan
 
                 <div class="flex space-x-4 items-center mt-4">
                     <div><strong>{{$postCount}}</strong> posts</div>
-                    <div><strong>{{ $followerCount }}</strong> followers</div>
-                    <div><strong>{{ $followingCount }}</strong> following</div>
+                    <div><strong>{{ $user->profile->followers->count() }}</strong> followers</div>
+                    <div><strong>{{ $user->following->count() }}</strong> following</div>
                 </div>
                 <div class="pt-4 font-bold">{{ $user->profile->title }}</div>
                 <div>{{ $user->profile->description }}</div>

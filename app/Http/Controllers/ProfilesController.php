@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Gate;
 use Intervention\Image\ImageManager;
 
 class ProfilesController extends Controller
@@ -32,7 +33,8 @@ class ProfilesController extends Controller
                 return $user->profile->followers->count();
             });
 
-        $follows = (auth()->user()) ? auth()->user()->following->contains($user->id) : false;
+        //$follows = (auth()->user()) ? auth()->user()->following->contains($user->id) : false;
+        $follows = false;
 
         //dd($follows);
        // \App\Models\User ili $user = User::findOrFail($user);
@@ -50,8 +52,8 @@ class ProfilesController extends Controller
     }
     public function edit(\App\Models\User $user){
         //$user = User::findOrFail($user); OR IN PARAM NAMESPACE
-
-        // bug $this->authorize('update', $user->profile);
+        $userprofile = $user->profile;
+        Gate::authorize('update',$userprofile);
 
 
 

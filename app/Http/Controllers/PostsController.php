@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use App\Models\Profile;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Intervention\Image\ImageManager;
 use Intervention\Image\Drivers\Imagick\Driver;
 
@@ -16,12 +18,20 @@ class PostsController extends Controller
         $posts = Post::whereIn('user_id',$users)->with('user')->orderBy('created_at','DESC')->paginate(5);
         return view('posts.index',compact('posts'));
     }
-    public function create()
+
+
+    public function create(Profile $profile)
     {
+        // Provjera vlasništva nad profilom
+        if ($profile->user_id !== Auth::id()) {
+            abort(403, 'Nemate pravo pristupa ovoj stranici.');
+        }
+
         return view('posts.create');
     }
 
-    public function store(Request $request)
+
+public function store(Request $request)
     {
         $data = $request->validate([
             'caption' => 'required',

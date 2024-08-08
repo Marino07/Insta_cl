@@ -22,7 +22,7 @@ Route::get('/dashboard', [ProfilesController::class, 'dashboard'])->name('dashbo
 Route::get('/', [\App\Http\Controllers\PostsController::class,'index'])->name('main');
 
 
-Route::get('/p/create',[\App\Http\Controllers\PostsController::class,'create']);
+Route::get('/p/create/{profile}', [\App\Http\Controllers\PostsController::class, 'create']);
 
 Route::get('/p/{post}',[\App\Http\Controllers\PostsController::class,'show']);
 
